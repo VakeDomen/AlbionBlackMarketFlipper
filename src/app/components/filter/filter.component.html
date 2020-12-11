@@ -1,0 +1,103 @@
+<div class="box mt-3">
+    <h1 class="title is-3">Markets</h1>
+    <div class="columns">
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.carleon">
+                Carleon
+            </label>
+        </div>
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.bridgewatch">
+                Bridgewatch 
+            </label>
+        </div>
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.martlock">
+                Martlock
+            </label>
+        </div>
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.fortstriling">
+                Fort Sterling 
+            </label>
+        </div>
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.thetford">
+                Thetford
+            </label>
+        </div>
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.city.lymhurst">
+                Lymhurst 
+            </label>
+        </div>
+    </div>    
+    <div class="columns">
+        <div class="column">
+            <h1 class="title is-3">Tiers</h1>
+    
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.tier.T4">
+                T4 Adept
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.tier.T5">
+                T5 Expert
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.tier.T6">
+                T6 Master
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.tier.T7">
+                T7 Grandmaster
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.tier.T8">
+                T8 Elder
+            </label>
+        </div>
+        <div class="column">
+            <h1 class="title is-3">Enchantment</h1>
+    
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.enchantment.E0">
+                0 Common
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.enchantment.E1">
+                1 Uncommon
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.enchantment.E2">
+                2 Rare
+            </label><br>
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.enchantment.E3">
+                3 Epic
+            </label>
+        </div>
+    </div>
+    <h1 class="title is-3">Premium</h1>
+    <div class="columns">
+        <div class="column">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="filter.premium">
+                Premium active 
+            </label>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column"></div>
+        <button class="column button is-primary" (click)="emitScan()">Scan</button>
+        <div class="column"></div>
+        <button class="column button is-danger" (click)="stopScannig()">Stop</button>
+        <div class="column"></div>
+    </div>
+</div>
