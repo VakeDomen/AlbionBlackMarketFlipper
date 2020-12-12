@@ -11,16 +11,10 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.albion_black_market_flipper.rule=Host(`${FRONTEND_DOMAIN}`)
+      - traefik.http.routers.albion_black_market_flipper.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.albion_black_market_flipper.entrypoints=websecure
       - traefik.http.routers.albion_black_market_flipper.tls=true
       - traefik.http.routers.albion_black_market_flipper.tls.certresolver=le
-
-      - traefik.http.routers.albion_black_market_flipper_2.rule=Host(`${FRONTEND_DOMAIN_2}`)
-      - traefik.http.routers.albion_black_market_flipper_2.entrypoints=websecure
-      - traefik.http.routers.albion_black_market_flipper_2.tls=true
-      - traefik.http.routers.albion_black_market_flipper_2.tls.certresolver=le
-#      - traefik.http.services.albion_black_market_flipper.loadbalancer.server.port=12001
 
 networks:
   proxy:
