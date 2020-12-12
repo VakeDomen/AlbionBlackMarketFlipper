@@ -149,7 +149,7 @@ export class FlipperComponent implements OnInit {
   }
 
   private extractTier(itemId: string): number {
-    return Number(itemId.split('T')[0].charAt(0));
+    return Number(itemId.split('T')[1].charAt(0));
   }
 
   private removeEnchant(itemId: string): string {
