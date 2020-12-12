@@ -1,52 +1,51 @@
-<div class="container mt-3" *ngIf="!(trades && trades.length > 0) && !scanning">
-    <div class="level">
-        <div class="level-item has-text-centered">
-            <h1 class="title is-2">No profitable trades to display! :/</h1>
+<div class="box mt-3">
+    <div class="container mt-3" *ngIf="!(trades && trades.length > 0) && !scanning">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title is-2">No profitable trades to display! :/</h1>
+            </div>
         </div>
     </div>
-</div>
-<div class="container mt-3" *ngIf="!(trades && trades.length > 0) && scanning"></div>
+    <div class="container mt-3" *ngIf="!(trades && trades.length > 0) && scanning"></div>
 
-<div class="container mt-3" *ngIf="scanning">
-    <div class="level">
-        <div class="level-item has-text-centered">
-            <progress class="progress is-small is-primary" max="100">15%</progress>
+    <div class="container" *ngIf="scanning">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <progress class="progress is-small is-primary" max="100">15%</progress>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container mt-3" *ngIf="trades && trades.length > 0">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ITEM</th>
-                <th>PROFIT (silver)</th>
-                <th>PROFIT (%)</th>
-                <th>ENCH</th>
-                <th>QUALITY</th>
-                <th>BUY</th>
-                <th>SELL</th>
-                <th>CITY</th>
-                <th>BM OFFER AGE</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let trade of sortByProfit(trades)">
-                <td>{{ trade.itemName }}</td>
-                <td>{{ trade.getProfit() }}</td>
-                <td>{{ trade.getProfitPercentage() }}%</td>
-                <td [ngClass]="{
+    <div class="container mt-3" *ngIf="trades && trades.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>PROFIT (silver)</th>
+                    <th>PROFIT (%)</th>
+                    <th>ENCH</th>
+                    <th>QUALITY</th>
+                    <th>BUY</th>
+                    <th>SELL</th>
+                    <th>CITY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trade of sortByProfit(trades)" (click)="copyToClipboard(trade.itemName)">
+                    <td>{{ trade.itemName }}</td>
+                    <td>{{ trade.getProfit() }}</td>
+                    <td>{{ trade.getProfitPercentage() }}%</td>
+                    <td [ngClass]="{
                     green: trade.itemEnchantment == 1,
                     blue: trade.itemEnchantment == 2,
                     purple: trade.itemEnchantment == 3
                 }">{{ trade.itemTier}}.{{ trade.itemEnchantment }}</td>
-                <td>{{ getQualityLabel(trade.itemQuality) }}</td>
-                <td>{{ trade.buy }}</td>
-                <td>{{ trade.sell }}</td>
-                <td>{{ trade.from }}</td>
-                <td>{{ trade.age.toDateString() }} {{ trade.age.toTimeString() }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>{{ getQualityLabel(trade.itemQuality) }}</td>
+                    <td>{{ trade.buy }}</td>
+                    <td>{{ trade.sell }}</td>
+                    <td>{{ trade.from }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-

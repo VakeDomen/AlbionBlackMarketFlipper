@@ -10,7 +10,7 @@
         <div class="column">
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.city.bridgewatch">
-                Bridgewatch 
+                Bridgewatch
             </label>
         </div>
         <div class="column">
@@ -22,7 +22,7 @@
         <div class="column">
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.city.fortstriling">
-                Fort Sterling 
+                Fort Sterling
             </label>
         </div>
         <div class="column">
@@ -34,14 +34,14 @@
         <div class="column">
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.city.lymhurst">
-                Lymhurst 
+                Lymhurst
             </label>
         </div>
-    </div>    
+    </div>
     <div class="columns">
         <div class="column">
             <h1 class="title is-3">Tiers</h1>
-    
+
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.tier.T4">
                 T4 Adept
@@ -65,7 +65,7 @@
         </div>
         <div class="column">
             <h1 class="title is-3">Enchantment</h1>
-    
+
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.enchantment.E0">
                 0 Common
@@ -89,15 +89,70 @@
         <div class="column">
             <label class="checkbox">
                 <input type="checkbox" [(ngModel)]="filter.premium">
-                Premium active 
+                Premium active
             </label>
         </div>
     </div>
     <div class="columns">
         <div class="column"></div>
-        <button class="column button is-primary" (click)="emitScan()">Scan</button>
+        <button class="column button is-primary" (click)="emitScan()" [disabled]="scanning">Scan</button>
         <div class="column"></div>
-        <button class="column button is-danger" (click)="stopScannig()">Stop</button>
+        <button class="column button is-danger" (click)="stopScannig()" [disabled]="!scanning">Stop</button>
         <div class="column"></div>
+        <button class="column button is-info" (click)="toggleSettings()">Advanced Settings</button>
+        <div class="column"></div>
+    </div>
+</div>
+<!-- advanced settings modal -->
+<div class="modal" [ngClass]="{'is-active': settingsOpen}">
+    <div class="modal-background" (click)="settingsOpen=!settingsOpen"></div>
+    <div class="modal-card">
+        <div class="content">
+            <div class="box">
+                <p class="has-text-centered title is-4">Advanced settings</p>
+                <div class="field">
+                    <label for=""><b>Minimum profit per trade (silver): </b></label>
+                    <label for="">This setting will bound the displayed trades to those that yield at least the provided profit in silver.</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.minprofit">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for=""><b>Minimum profit per trade (%): </b></label>
+                    <label for="">This setting will bound the displayed trades to those that yield at least the provided profit %.</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.minPercentProfit">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for=""><b>Maxmimum profit per trade (%): </b></label>
+                    <label for="">This setting will bound the displayed trades to those that yield at most the provided profit %. This helps remove the anomalies in the data.</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.maxPercentProfit">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for=""><b>Refresh timer in seconds: </b></label>
+                    <label for="">This setting will specify the time it takes to refresh the trades. Do not put on too low setting, it may lagg your browser and strain your internet connection (lots of downloaded data).</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.refreshTimer">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for=""><b>Maximum Black market age in minutes: </b></label>
+                    <label for="">Maximum age of the black market deal since it's last update (system does not know when the deal has been completed). Old deals were probably already completed.</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.maxBMage">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for=""><b>Maximum city maket age in minutes: </b></label>
+                    <label for="">Maximum age of the price on the city market since it's last update (system does not know when the item has been purchased). Old deals were probably already bought.</label>
+                    <div class="control">
+                        <input class="input is-primary" type="number" [(ngModel)]="filter.maxMarketAge">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -8,12 +8,13 @@ export class Trade {
     from: string;
     buy: number;
     sell: number;
-    age: Date;
+    BMage: Date;
+    cityage: Date;
     filter: FilterData;
 
     private floatingDecimalPercision = 3;
 
-    constructor(itemName: string, itemTier: number, itemEnchantment: number, itemQuality: number, from: string, buy: number, sell: number, age: Date, filter: FilterData) {
+    constructor(itemName: string, itemTier: number, itemEnchantment: number, itemQuality: number, from: string, buy: number, sell: number, BMage: Date, cityage: Date, filter: FilterData) {
         this.itemName = itemName;
         this.itemTier = itemTier;
         this.itemEnchantment = itemEnchantment;
@@ -21,7 +22,8 @@ export class Trade {
         this.from = from;
         this.buy = buy;
         this.sell = sell;
-        this.age = age;
+        this.BMage = BMage;
+        this.cityage = cityage;
         this.filter = filter;
     }
 
@@ -34,7 +36,8 @@ export class Trade {
             this.sell !== 0 &&
             !this.isOutdated() &&
             this.getProfit() >= this.filter.minprofit &&
-            this.getProfitPercentage() < 1000;
+            this.getProfitPercentage() <= this.filter.maxPercentProfit &&
+            this.getProfitPercentage() >= this.filter.minPercentProfit;
 
     }
     
@@ -47,7 +50,8 @@ export class Trade {
     }
 
     isOutdated(): boolean {
-        return ((new Date().getTime() - this.age.getTime()) / (60 * 1000) - 60) > (this.filter.maxBMAge);;
+        return ((new Date().getTime() - this.BMage.getTime()) / (60 * 1000) - 60) > (this.filter.maxBMage) ||
+            ((new Date().getTime() - this.cityage.getTime()) / (60 * 1000) - 60) > (this.filter.maxMarketAge);
     }
 
     private getTax(): number {

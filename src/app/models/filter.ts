@@ -15,7 +15,12 @@ export class FilterData {
     };
     premium: boolean;
     minprofit: number;
-    maxBMAge: number;
+    minPercentProfit: number;
+    maxPercentProfit: number;
+    refreshTimer: number;
+    maxBMage: number;
+    maxMarketAge: number;
+
 
     constructor() {
         this.city = {
@@ -27,11 +32,11 @@ export class FilterData {
             lymhurst: false,
         };
         this.tier = {
-            T4: true,
+            T4: false,
             T5: true,
             T6: true,
             T7: true,
-            T8: true,
+            T8: false,
         }
         this.enchantment = {
             E0: true,
@@ -39,8 +44,12 @@ export class FilterData {
             E2: true,
             E3: true,
         };
-        this.premium = true;
+        this.premium = false;
         this.minprofit = 5000;
-        this.maxBMAge = 30;
+        this.minPercentProfit = 5;
+        this.maxPercentProfit = 200;
+        this.refreshTimer = 5;
+        this.maxBMage = 20;
+        this.maxMarketAge = 20;
     }
 }

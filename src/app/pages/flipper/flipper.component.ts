@@ -20,10 +20,15 @@ type Item = {
       bmPrice: number;
       bmAge: Date;
       cities: {
-        [city: string]: number;
+        [city: string]: Price;
       }
     }
   }
+}
+
+type Price = {
+  price: number;
+  age: Date;
 }
 
 
@@ -97,9 +102,10 @@ export class FlipperComponent implements OnInit {
               itemEnchantment, 
               quality, 
               city, 
-              item.quality[quality].cities[city], 
+              item.quality[quality].cities[city].price, 
               item.quality[quality].bmPrice,
               item.quality[quality].bmAge,
+              item.quality[quality].cities[city].age,
               filter
             );
             if (trade.isProfitable() && trade.ifAlowed()) {
@@ -133,7 +139,10 @@ export class FlipperComponent implements OnInit {
         itemCache[item.item_id][this.extractEnchant(item.item_id)].quality[item.quality].bmAge = new Date(item.buy_price_max_date);
 
       } else {
-        itemCache[item.item_id][this.extractEnchant(item.item_id)].quality[item.quality].cities[item.city] = item.sell_price_min;
+        itemCache[item.item_id][this.extractEnchant(item.item_id)].quality[item.quality].cities[item.city] = {
+          age: new Date(item.sell_price_min_date),
+          price: item.sell_price_min
+        };
       }
     });  
     return itemCache;

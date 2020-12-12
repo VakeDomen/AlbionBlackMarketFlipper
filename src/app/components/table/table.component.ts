@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { Trade } from 'src/app/models/trade';
 
 @Component({
@@ -37,4 +37,18 @@ export class TableComponent implements OnChanges {
   sortByProfit(trades: Trade[]): Trade[] {
     return trades.sort((a,b) => (a.getProfit() > b.getProfit() ? -1 : ((b.getProfit() > a.getProfit()) ? 1 : 0)));
   }
+
+  copyToClipboard(item: any): void {
+    const copy = (e: ClipboardEvent) => {
+      if (e.clipboardData) {
+        e.clipboardData.setData('text/plain', (item));
+        e.preventDefault();
+      }
+    }
+    document.addEventListener('copy', copy);
+    document.execCommand('copy');
+    document.removeEventListener('copy', copy);
+  }
+
+
 }
